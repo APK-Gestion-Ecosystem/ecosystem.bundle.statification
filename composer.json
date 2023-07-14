@@ -1,0 +1,12 @@
+{
+    "name": "ecosystem/statification",
+    "type": "symfony-bundle",
+    "autoload": {
+        "psr-4": {
+            "Ecosystem\\StatificationBundle\\": "src/"
+        }
+    },
+    "require": {
+        "aws/aws-sdk-php": "^3"
+    }
+}
