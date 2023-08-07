@@ -22,7 +22,7 @@ class SettingService
             'version' => '2006-03-01',
         ];
 
-        if ($this->key !== null && $this->bucket) {
+        if ($this->key !== null && $this->secret !== null) {
             $config['credentials'] = [
                 'key' => $this->key,
                 'secret' => $this->secret,
