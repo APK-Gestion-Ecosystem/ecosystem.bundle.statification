@@ -17,8 +17,7 @@ class EcosystemStatificationBundle extends AbstractBundle
     ): void {
         $containerConfigurator->import('../config/services.yaml');
         $containerConfigurator->services()->get(SettingService::class)->arg(0, $config['bucket']);
-        $containerConfigurator->services()->get(SettingService::class)->arg(1, $config['key'] ?? null);
-        $containerConfigurator->services()->get(SettingService::class)->arg(2, $config['secret'] ?? null);
+        $containerConfigurator->services()->get(WidgetService::class)->arg(0, $config['bucket']);
     }
 
     public function configure(DefinitionConfigurator $definition): void
