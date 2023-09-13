@@ -27,7 +27,7 @@ class WidgetService
         $this->client = new S3Client($config);
     }
 
-    public function getWidget(string $widget): ?string
+    public function getWidget(string $widget): ?array
     {
         $key = sprintf(
             'statifications/%s/%s.json',
@@ -49,10 +49,9 @@ class WidgetService
         }
 
         try {
-            $content = json_decode($content->getContents(), true, 512, JSON_THROW_ON_ERROR);
+            return json_decode($content->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (\JsonException) {
             return null;
         }
-        return $content[$widget] ?? null;
     }
 }
