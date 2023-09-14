@@ -4,6 +4,9 @@ namespace Ecosystem\StatificationBundle;
 
 use Ecosystem\StatificationBundle\Service\SettingService;
 use Ecosystem\StatificationBundle\Service\WidgetService;
+use Ecosystem\StatificationBundle\Service\InfoPageService;
+use Ecosystem\StatificationBundle\Service\ContentPageService;
+use Ecosystem\StatificationBundle\Service\ArticleService;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
