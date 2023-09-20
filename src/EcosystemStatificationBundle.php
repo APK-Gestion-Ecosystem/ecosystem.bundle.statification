@@ -7,6 +7,7 @@ use Ecosystem\StatificationBundle\Service\WidgetService;
 use Ecosystem\StatificationBundle\Service\InfoPageService;
 use Ecosystem\StatificationBundle\Service\ContentPageService;
 use Ecosystem\StatificationBundle\Service\ArticleService;
+use Ecosystem\StatificationBundle\Service\RedirectionService;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -25,6 +26,7 @@ class EcosystemStatificationBundle extends AbstractBundle
         $containerConfigurator->services()->get(InfoPageService::class)->arg(0, $config['bucket']);
         $containerConfigurator->services()->get(ContentPageService::class)->arg(0, $config['bucket']);
         $containerConfigurator->services()->get(ArticleService::class)->arg(0, $config['bucket']);
+        $containerConfigurator->services()->get(RedirectionService::class)->arg(0, $config['bucket']);
     }
 
     public function configure(DefinitionConfigurator $definition): void
