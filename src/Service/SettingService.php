@@ -28,7 +28,7 @@ class SettingService
         $this->client = new S3Client($config);
     }
 
-    public function getSettings(): ?array
+    public function getSettings(string $locale = 'es'): ?array
     {
         $key = sprintf(
             'statifications/%s/%s.json',
@@ -50,13 +50,14 @@ class SettingService
         }
 
         try {
-            return json_decode($content->getContents(), true, 512, JSON_THROW_ON_ERROR);
+            $content = json_decode($content->getContents(), true, 512, JSON_THROW_ON_ERROR);
+            return $content[$locale] ?? null;
         } catch (\JsonException) {
             return null;
         }
     }
 
-    public function getSetting(string $setting): ?string
+    public function getSetting(string $setting, string $locale = 'es'): ?string
     {
         $key = sprintf(
             'statifications/%s/%s.json',
@@ -83,6 +84,6 @@ class SettingService
             return null;
         }
 
-        return $content[$setting] ?? null;
+        return $content[$locale][$setting] ?? null;
     }
 }
