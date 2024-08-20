@@ -18,11 +18,10 @@ class RedirectionService
             'version' => '2006-03-01',
         ];
 
-        if (false !== getenv('AWS_ACCESS_KEY_ID') && false !== getenv('AWS_SECRET_ACCESS_KEY')) {
-            $config['credentials'] = [
-                'key' => getenv('AWS_ACCESS_KEY_ID'),
-                'secret' => getenv('AWS_SECRET_ACCESS_KEY'),
-            ];
+        if (getenv('LOCALSTACK')) {
+            $config['endpoint'] = 'http://localstack:4566';
+            $config['credentials'] = false;
+            $config['use_path_style_endpoint'] = true;
         }
 
         $this->client = new S3Client($config);
