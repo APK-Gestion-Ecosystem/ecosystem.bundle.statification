@@ -27,12 +27,12 @@ class ArticleService
         $this->client = new S3Client($config);
     }
 
-    public function getArticle(string $article): ?array
+    public function getArticle(string $article, string $country = 'es'): ?array
     {
         $key = sprintf(
             'statifications/%s/%s.json',
             self::ARTICLE_STATIFICATION_KEY,
-            $article
+            sprintf('%s_%s', $country, $article)
         );
 
         if (!$this->client->doesObjectExist($this->bucket, $key)) {

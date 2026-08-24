@@ -26,12 +26,12 @@ class ContentPageService
         $this->client = new S3Client($config);
     }
 
-    public function getContentPage(string $contentPage): ?array
+    public function getContentPage(string $contentPage, string $country = 'es'): ?array
     {
         $key = sprintf(
             'statifications/%s/%s.json',
             self::CONTENTPAGE_STATIFICATION_KEY,
-            $contentPage
+            sprintf('%s_%s', $country, $contentPage)
         );
 
         if (!$this->client->doesObjectExist($this->bucket, $key)) {

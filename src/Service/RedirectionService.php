@@ -7,7 +7,7 @@ use Aws\S3\S3Client;
 class RedirectionService
 {
     private const REDIRECTION_STATIFICATION_KEY = 'redirection';
-    private const  REDIRECTION_STATIFICATION_FILENAME = 'redirections';
+    private const  REDIRECTION_STATIFICATION_FILENAME = '%s_redirections';
 
     private S3Client $client;
 
@@ -27,12 +27,12 @@ class RedirectionService
         $this->client = new S3Client($config);
     }
 
-    public function getRedirections(): ?array
+    public function getRedirections(string $country = 'es'): ?array
     {
         $key = sprintf(
             'statifications/%s/%s.json',
             self::REDIRECTION_STATIFICATION_KEY,
-            self::REDIRECTION_STATIFICATION_FILENAME,
+            sprintf(self::REDIRECTION_STATIFICATION_FILENAME, $country),
         );
 
         if (!$this->client->doesObjectExist($this->bucket, $key)) {
