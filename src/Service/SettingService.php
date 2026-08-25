@@ -56,7 +56,7 @@ class SettingService
         }
     }
 
-    public function getSetting(string $setting, string $country = 'es', string $locale = 'es', ): ?string
+    public function getSetting(string $setting, string $country = 'es', string $locale = 'es'): ?string
     {
         $key = sprintf(
             'statifications/%s/%s.json',

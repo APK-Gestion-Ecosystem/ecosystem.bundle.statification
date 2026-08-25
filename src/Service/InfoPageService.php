@@ -26,12 +26,12 @@ class InfoPageService
         $this->client = new S3Client($config);
     }
 
-    public function getInfoPage(string $infoPage, string $country = 'es'): ?array
+    public function getInfoPage(string $infoPage): ?array
     {
         $key = sprintf(
             'statifications/%s/%s.json',
             self::INFOPAGE_STATIFICATION_KEY,
-            sprintf('%s_%s', $country, $infoPage)
+            $infoPage
         );
 
         if (!$this->client->doesObjectExist($this->bucket, $key)) {
