@@ -7,7 +7,7 @@ use Aws\S3\S3Client;
 class SettingService
 {
     private const SETTINGS_STATIFICATION_KEY = 'setting';
-    private const SETTINGS_STATIFICATION_FILENAME = 'settings';
+    private const SETTINGS_STATIFICATION_FILENAME = '%s_settings';
 
     private S3Client $client;
 
@@ -27,12 +27,12 @@ class SettingService
         $this->client = new S3Client($config);
     }
 
-    public function getSettings(string $locale = 'es'): ?array
+    public function getSettings(string $country = 'es', string $locale = 'es'): ?array
     {
         $key = sprintf(
             'statifications/%s/%s.json',
             self::SETTINGS_STATIFICATION_KEY,
-            self::SETTINGS_STATIFICATION_FILENAME
+            sprintf(self::SETTINGS_STATIFICATION_FILENAME, $country)
         );
 
         if (!$this->client->doesObjectExist($this->bucket, $key)) {
@@ -56,12 +56,12 @@ class SettingService
         }
     }
 
-    public function getSetting(string $setting, string $locale = 'es'): ?string
+    public function getSetting(string $setting, string $country = 'es', string $locale = 'es'): ?string
     {
         $key = sprintf(
             'statifications/%s/%s.json',
             self::SETTINGS_STATIFICATION_KEY,
-            self::SETTINGS_STATIFICATION_FILENAME
+            sprintf(self::SETTINGS_STATIFICATION_FILENAME, $country)
         );
 
         if (!$this->client->doesObjectExist($this->bucket, $key)) {
