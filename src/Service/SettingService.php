@@ -8,6 +8,7 @@ class SettingService
 {
     private const SETTINGS_STATIFICATION_KEY = 'setting';
     private const SETTINGS_STATIFICATION_FILENAME = '%s_settings';
+    private const SETTINGS_STATIFICATION_FILENAME_OLD = 'settings';
 
     private S3Client $client;
 
@@ -36,7 +37,15 @@ class SettingService
         );
 
         if (!$this->client->doesObjectExist($this->bucket, $key)) {
-            return null;
+            $key = sprintf(
+                'statifications/%s/%s.json',
+                self::SETTINGS_STATIFICATION_KEY,
+                self::SETTINGS_STATIFICATION_FILENAME_OLD
+            );
+
+            if (!$this->client->doesObjectExist($this->bucket, $key)) {
+                return null;
+            }
         }
 
         $content = $this->client->getObject([
@@ -65,7 +74,15 @@ class SettingService
         );
 
         if (!$this->client->doesObjectExist($this->bucket, $key)) {
-            return null;
+            $key = sprintf(
+                'statifications/%s/%s.json',
+                self::SETTINGS_STATIFICATION_KEY,
+                self::SETTINGS_STATIFICATION_FILENAME_OLD
+            );
+
+            if (!$this->client->doesObjectExist($this->bucket, $key)) {
+                return null;
+            }
         }
 
         $content = $this->client->getObject([
